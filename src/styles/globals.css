@@ -2,52 +2,51 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
 
   /* Neutral Colors */
   --neutral-0: #ffffff;
   --neutral-100: #f6f6f9;
-  --neutral-150: #eaeaf1;
+  --neutral-150: #eaeaef;
   --neutral-200: #dcdce4;
-  --neutral-300: #c0c0ce;
+  --neutral-300: #c0c0cf;
   --neutral-400: #a5a5ba;
-  --neutral-500: #8e8ea9;
+  --neutral-500: #8E8EA9;
   --neutral-600: #666687;
-  --neutral-700: #4a4a6a;
-  --neutral-800: #232340;
-  --neutral-900: #12121a;
+  --neutral-700: #4A4A6A;
+  --neutral-800: #32324D;
+  --neutral-900: #212134;
 
   /* Primary Colors */
-  --primary-100: #e8eaf2;
-  --primary-200: #c4c6d7;
-  --primary-500: #999142;
+  --primary-100: #EBEAF2;
+  --primary-200: #C4C0D7;
+  --primary-500: #8981AE;
   --primary-600: #615793;
-  --primary-700: #2a237e;
+  --primary-700: #3A2D78;
 
   /* Secondary Colors */
-  --secondary-100: #ffff63;
-  --secondary-200: #fff7b9;
-  --secondary-500: #ffd98e;
-  --secondary-600: #ffc861;
-  --secondary-700: #ffb014;
-  --secondary-800: #ffa330;
+  --secondary-100: #FFF7E8;
+  --secondary-200: #FFE7BB;
+  --secondary-500: #FFD88E;
+  --secondary-600: #FFC861;
+  --secondary-700: #FFB01D;
+  --secondary-800: #FAA300;
 
   /* Tertiary Colors */
-  --tertiary-50: #fff2ea;
-  --tertiary-100: #ffd2c0;
-  --tertiary-200: #ffb080;
-  --tertiary-600: #ff8958;
-  --tertiary-700: #ff463c;
+  --tertiary-50: #FFF2EA;
+  --tertiary-100: #FFD7C0;
+  --tertiary-200: #FFB080;
+  --tertiary-600: #FF9556;
+  --tertiary-700: #FF7B2C;
 
   /* Success Colors */
-  --success-200: #a4e4c6;
-  --success-500: #4ade75;
-  --success-700: #24a148;
+  --success-200: #B4EFC6;
+  --success-500: #4AD775;
+  --success-700: #24A44B;
 
   /* Danger Colors */
-  --danger-200: #ffcccc;
-  --danger-500: #ff2143;
-  --danger-700: #dc2626;
+  --danger-200: #FCCCCC;
+  --danger-500: #F24343;
+  --danger-700: #DE0F0F;
 
   /* Surface Gradient */
   --gradient-light: #ffffff;
@@ -110,26 +109,7 @@
   --color-gradient-dark: var(--gradient-dark);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
 
-    /* Override some colors for dark mode if needed */
-    --neutral-0: var(--neutral-900);
-    --neutral-100: var(--neutral-800);
-    --neutral-200: var(--neutral-700);
-    --neutral-300: var(--neutral-600);
-    --neutral-600: var(--neutral-300);
-    --neutral-700: var(--neutral-200);
-    --neutral-800: var(--neutral-100);
-    --neutral-900: #ffffff;
-
-    /* Adjust gradient for dark mode */
-    --gradient-light: var(--gradient-dark);
-    --gradient-dark: #12121a;
-  }
-}
 
 body {
   background: var(--background);
