@@ -22,17 +22,17 @@ const NavbarContent = () => {
   return (
     <>
       <nav
-        className={`fixed right-0 left-0 top-0 py-4 z-100 transition-transform duration-300 ${
-          isVisible ? "translate-y-0 lg:bg-blue-500" : "-translate-y-full"
+        className={`fixed right-0 left-0 top-0 py-4 z-100 transition-transform duration-300 font-sans ${
+          isVisible ? "translate-y-0 lg:bg-neutral-900" : "-translate-y-full"
         }`}
       >
         <div className="mycontainer items-center lg:flex hidden justify-between">
-          <div className="w-1/5 font-robotech text-white text-glow text-5xl mb-2 font-bold">
+          <div className="w-1/5 font-sans text-white text-4xl mb-2 font-bold">
             <Link
               className="transition-transform hover:scale-105"
               href={"/home"}
             >
-              <h1 className="transition-transform hover:scale-105">IT FEST</h1>
+              <h1 className="transition-transform hover:scale-105">SEA</h1>
             </Link>
           </div>
           <ul className="w-3/5 flex justify-center gap-10">
@@ -67,7 +67,7 @@ const NavbarContent = () => {
           isVisible ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <div className="font-bold font-robotech text-white text-glow text-4xl">
+        <div className="font-bold font-sans text-white text-glow text-4xl">
           <Link href="/home">
             <h1>IT FEST</h1>
           </Link>
