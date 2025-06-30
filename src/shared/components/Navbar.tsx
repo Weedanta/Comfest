@@ -27,7 +27,7 @@ const NavbarContent = () => {
         }`}
       >
         <div className="mycontainer items-center lg:flex hidden justify-between">
-          <div className="w-1/5 text-3xl font-semibold">
+          <div className="w-1/5 text-2xl font-semibold">
             <Link
               className="transition-transform hover:scale-105"
               href={"/home"}

@@ -38,7 +38,7 @@ const Navlist: FC<NavlistProps> = ({ item, onClick }) => {
 
   return (
     <Link
-      className="text-white text-xl font-bold font-changa hover:text-blue-200 transition-colors"
+      className="text-white text-xl font-bold font-changa hover:text-neutral-300 transition-colors"
       href={item.href}
       onClick={handleClick}
     >
