@@ -109,12 +109,29 @@
   --color-gradient-dark: var(--gradient-dark);
 }
 
+/* Global Styles */
+* {
+  box-sizing: border-box;
+}
 
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  transition: all 0.3s ease;
+}
+
+/* Smooth transitions for all interactive elements */
+button, 
+a, 
+input, 
+textarea, 
+select {
+  transition: all 0.2s ease-in-out;
 }
 
 /* Custom utility classes */
@@ -159,7 +176,123 @@ body {
     @apply focus:outline-none focus:ring-2 focus:ring-danger-500 focus:ring-offset-2;
   }
 
+  /* Smooth hamburger menu animations */
+  .hamburger-enter {
+    animation: slideInRight 0.3s ease-out;
+  }
+
+  .hamburger-exit {
+    animation: slideOutRight 0.3s ease-in;
+  }
+
+  /* Custom container */
   .mycontainer {
-  @apply container right-0 left-0 mx-auto lg:px-8 md:px-28 px-8 xl:px-24 transition-all duration-300;
+    @apply max-w-5/6 mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Smooth backdrop blur */
+  .backdrop-blur-smooth {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
 }
+
+/* Keyframe animations */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Mobile menu specific animations */
+.mobile-menu-item {
+  animation: slideUp 0.4s ease-out forwards;
+}
+
+.mobile-menu-item:nth-child(1) { animation-delay: 0.1s; }
+.mobile-menu-item:nth-child(2) { animation-delay: 0.2s; }
+.mobile-menu-item:nth-child(3) { animation-delay: 0.3s; }
+.mobile-menu-item:nth-child(4) { animation-delay: 0.4s; }
+
+/* Prevent flash of unstyled content */
+.no-js body {
+  visibility: hidden;
+}
+
+/* Loading state */
+.loading {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* Smooth scrollbar styling for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--neutral-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--neutral-400);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neutral-500);
+}
+
+/* Firefox scrollbar styling */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--neutral-400) var(--neutral-100);
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

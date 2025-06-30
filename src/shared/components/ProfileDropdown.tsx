@@ -1,4 +1,3 @@
-// Path: src/shared/components/ProfileDropdown.tsx
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";

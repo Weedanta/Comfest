@@ -1,4 +1,3 @@
-// Path: src/shared/context/AuthContext.tsx
 "use client";
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { User, JWTPayload } from "../type/TAuth";

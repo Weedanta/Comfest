@@ -22,24 +22,26 @@ const NavbarContent = () => {
   return (
     <>
       <nav
-        className={`fixed right-0 left-0 top-0 py-4 z-100 transition-transform duration-300 font-sans ${
-          isVisible ? "translate-y-0 lg:bg-neutral-900" : "-translate-y-full"
+        className={`fixed right-0 left-0 top-0 py-4 z-100 transition-transform duration-300 ${
+          isVisible ? "translate-y-0 lg:bg-neutral-800" : "-translate-y-full"
         }`}
       >
         <div className="mycontainer items-center lg:flex hidden justify-between">
-          <div className="w-1/5 font-sans text-white text-4xl mb-2 font-bold">
+          <div className="w-1/5 text-3xl font-semibold">
             <Link
               className="transition-transform hover:scale-105"
               href={"/home"}
             >
-              <h1 className="transition-transform hover:scale-105">SEA</h1>
+              <h1 className="transition-transform hover:scale-105">
+                <span className="text-secondary-700">SEA </span><span className="text-white">Catering</span>
+              </h1>
             </Link>
           </div>
-          <ul className="w-3/5 flex justify-center gap-10">
+          <ul className="w-3/5 flex justify-center items-center gap-10">
             {Navlink.map((item) => (
               <div key={item.id} className="relative group">
                 <Navlist item={item} />
-                <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-white transition-all group-hover:w-full"></span>
+                <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-secondary-700 transition-all group-hover:w-full"></span>
               </div>
             ))}
           </ul>
@@ -52,7 +54,7 @@ const NavbarContent = () => {
               />
             ) : (
               <Link href={"/login"}>
-                <Button variant={"primary"} size={"small"}>
+                <Button variant={"primary"} size={"small"} className=" h-12 font-sans font-medium">
                   Masuk
                 </Button>
               </Link>
@@ -63,17 +65,20 @@ const NavbarContent = () => {
 
       {/* Mobile Navbar */}
       <nav
-        className={`w-screen px-10 sm:px-14 md:px-16 bg-blue-500 flex z-100 py-4 fixed justify-between items-center lg:hidden transition-transform duration-300 ${
+        className={`w-screen px-10 sm:px-14 md:px-16 bg-neutral-800 flex z-100 py-4 fixed justify-between items-center lg:hidden transition-transform duration-300 ${
           isVisible ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <div className="font-bold font-sans text-white text-glow text-4xl">
+        <div className="font-semibold text-2xl">
           <Link href="/home">
-            <h1>IT FEST</h1>
+            <h1>
+              <span className="text-secondary-700">SEA </span>
+              <span className="text-white">Catering</span>
+            </h1>
           </Link>
         </div>
         <div
-          className={`${isOpen ? "bg-transparent " : "bg-[#171F74]"} rounded-lg`}
+          className={`${isOpen ? "bg-transparent " : "bg-neutral-700"} rounded-lg`}
         >
           <Hamburger
             size={25}
@@ -93,12 +98,12 @@ const MobileNav = ({ closeMobileMenu }: { closeMobileMenu: () => void }) => {
   const { isAuthenticated, user, logout, IsAdmin } = useAuth();
 
   return (
-    <div className="h-screen w-screen inset-0 fixed bg-blue-500 top-0 left-0 z-50 flex flex-col items-center pt-24">
+    <div className="h-screen w-screen inset-0 fixed bg-neutral-800 top-0 left-0 z-50 flex flex-col items-center pt-24">
       <ul className="flex flex-col items-center gap-6 mb-8">
         {Navlink.map((item) => (
           <li key={item.id} className="text-white text-lg relative group">
             <Navlist item={item} onClick={closeMobileMenu} />
-            <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-white transition-all group-hover:w-full"></span>
+            <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-secondary-700 transition-all group-hover:w-full"></span>
           </li>
         ))}
       </ul>
@@ -111,7 +116,7 @@ const MobileNav = ({ closeMobileMenu }: { closeMobileMenu: () => void }) => {
           />
         ) : (
           <Link href="/login">
-            <Button variant={"primary"} size={"small"}>
+            <Button variant={"primary"} size={"small"} className="h-12 font-sans font-medium">
               Daftar
             </Button>
           </Link>

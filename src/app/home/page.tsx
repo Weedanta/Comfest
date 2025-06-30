@@ -1,12 +1,14 @@
-import React from 'react'
 import { Button } from '@/shared/components/ui/Button'
+import Navbar from '@/shared/components/Navbar'
+import Footer from '@/shared/components/Footer'
 
-const HomePage = () => {
+export default function HomePage() {
   return (
-    <div>
-      
-    </div>
+    <main className='min-h-screen scroll-smooth'>
+      {/* <Navbar/>
+      <div className="h-screen"></div>
+      <Footer/> */}
+    </main>
   )
 }
 
-export default HomePage
