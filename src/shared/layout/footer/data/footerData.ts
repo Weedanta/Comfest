@@ -1,4 +1,4 @@
-import { FooterSection, ContactInfo, SocialLink } from "../types/footer.types";
+import { FooterSection, ContactInfo } from "../types/footer.types";
 
 export const footerSections: FooterSection[] = [
   {
@@ -27,18 +27,3 @@ export const contactInfo: ContactInfo = {
   email: "info@seacatering.com",
   address: "Jakarta, Indonesia",
 };
-
-export const socialLinks: SocialLink[] = [
-  {
-    name: "Instagram",
-    href: "https://instagram.com/seacatering",
-    imageSrc: "/assets/img/socialmedia/instagram.png", // Adjust extension if needed
-    ariaLabel: "Follow us on Instagram",
-  },
-  {
-    name: "WhatsApp",
-    href: `https://wa.me/6208123456789`,
-    imageSrc: "/assets/img/socialmedia/phone.png", // Assuming this is WhatsApp icon
-    ariaLabel: "Contact us via WhatsApp",
-  },
-];

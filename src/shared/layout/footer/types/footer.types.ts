@@ -14,10 +14,3 @@ export interface ContactInfo {
   email?: string;
   address?: string;
 }
-
-export interface SocialLink {
-  name: string;
-  href: string;
-  imageSrc: string;
-  ariaLabel: string;
-}
