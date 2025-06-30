@@ -9,12 +9,12 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-primary-600 text-white hover:bg-primary-700",
+          "bg-primary-600 text-white hover:bg-primary-700 font-sans",
         secondary:
-          "bg-neutral-0 text-primary-700  hover:bg-neutral-100",
+          "bg-neutral-0 text-primary-700  hover:bg-neutral-100 font-sans",
         disabled: "bg-neutral-400 text-neutral-200 cursor-not-allowed",
         tertiary:
-          "bg-tertiary-600 text-white hover:bg-tertiary-700",
+          "bg-tertiary-600 text-white hover:bg-tertiary-700 font-sans",
       },
       size: {
         normal: "w-56",

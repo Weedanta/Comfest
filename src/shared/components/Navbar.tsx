@@ -54,8 +54,8 @@ const NavbarContent = () => {
               />
             ) : (
               <Link href={"/login"}>
-                <Button variant={"primary"} size={"small"} className=" h-12 font-sans font-medium">
-                  Masuk
+                <Button variant={"primary"} size={"small"} className=" h-12 font-sans font-semibold">
+                  Login
                 </Button>
               </Link>
             )}
@@ -116,8 +116,8 @@ const MobileNav = ({ closeMobileMenu }: { closeMobileMenu: () => void }) => {
           />
         ) : (
           <Link href="/login">
-            <Button variant={"primary"} size={"small"} className="h-12 font-sans font-medium">
-              Daftar
+            <Button variant={"primary"} size={"small"} className="h-12 font-sans font-semibold">
+              Login
             </Button>
           </Link>
         )}

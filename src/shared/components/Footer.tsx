@@ -8,33 +8,18 @@ const Footer: React.FC = () => {
     {
       title: "Page",
       links: [
-        { name: "About Us", href: "/about" },
-        { name: "Careers", href: "/careers" },
+        { name: "About", href: "/about" },
+        { name: "Menu", href: "/careers" },
         { name: "Contact", href: "/contact" },
-      ],
-    },
-    {
-      title: "Services",
-      links: [
-        { name: "Menu", href: "/menu" },
-        { name: "Order", href: "/order" },
-        { name: "Catering", href: "/catering" },
-      ],
-    },
-    {
-      title: "Kontak",
-      links: [
-        { name: "Help Center", href: "/help" },
-        { name: "Privacy Policy", href: "/privacy" },
-        { name: "Terms of Service", href: "/terms" },
+        { name: "Order", href: "/contact" },
       ],
     },
   ];
 
   return (
-    <footer className="bg-neutral-900 text-white py-12">
+    <footer className="bg-neutral-900 text-white py-16">
       <div className="mycontainer">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Brand Section */}
           <div className="lg:col-span-1">
             <h2 className="font-robotech text-2xl font-bold text-white text-glow mb-4">
