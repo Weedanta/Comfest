@@ -1,10 +1,5 @@
-import HeroContainer from "@/feature/home/hero/container/HeroContainer"
+import HomePageContainer from "@/feature/home/Container/HomePageContainer"
 
 export default function HomePage() {
-  return (
-    <main className='min-h-screen scroll-smooth'>
-      <HeroContainer/>
-    </main>
-  )
+  return <HomePageContainer />
 }
-
