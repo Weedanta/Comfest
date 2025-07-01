@@ -5,6 +5,7 @@ import {
   RegisterCredentials, 
   AuthResponse, 
   User,
+  UserRole,
   ApiErrorResponse 
 } from "@/shared/type/TAuth";
 
@@ -14,7 +15,7 @@ interface MockUser {
   email: string;
   name: string;
   password: string;
-  role: "admin" | "user";
+  role: UserRole;
   IsAdmin: boolean;
   permissions: string[];
   createdAt: string;
@@ -27,8 +28,8 @@ const mockUsers: MockUser[] = [
     UserID: "admin-1",
     email: "admin@seacatering.com",
     name: "Admin User",
-    password: "Admin123!",
-    role: "admin",
+    password: hashPassword("Admin123!"),
+    role: "ADMIN",
     IsAdmin: true,
     permissions: ["read", "write", "delete"],
     createdAt: "2024-01-01T00:00:00Z",
@@ -38,8 +39,8 @@ const mockUsers: MockUser[] = [
     UserID: "user-1", 
     email: "brian@example.com",
     name: "Brian Manager",
-    password: "User123!",
-    role: "user",
+    password: hashPassword("User123!"),
+    role: "USER",
     IsAdmin: false,
     permissions: ["read"],
     createdAt: "2024-01-01T00:00:00Z",
@@ -56,7 +57,7 @@ const generateToken = (user: MockUser): string => {
     UserID: user.UserID,
     email: user.email,
     name: user.name,
-    role: user.role === "admin" ? "ADMIN" : user.role === "user" ? "USER" : "USER",
+    role: user.role,
     IsAdmin: user.IsAdmin,
     permissions: user.permissions,
     exp: Math.floor(Date.now() / 1000) + (24 * 60 * 60), // 24 hours
@@ -96,7 +97,7 @@ export const authAPI = {
         };
       }
       
-      // Verify password
+      // Verify password - compare plain password with stored hashed password
       if (!verifyPassword(password, user.password)) {
         return {
           status: { code: 401, isSuccess: false },
@@ -110,14 +111,14 @@ export const authAPI = {
       
       // Convert to User interface for response
       const userResponse: User = {
-        id: user.UserID,
+        UserID: user.UserID,
         email: user.email,
         name: user.name,
-        role: user.role === "admin" ? "ADMIN" : user.role === "user" ? "USER" : "USER",
+        role: user.role,
+        IsAdmin: user.IsAdmin,
         permissions: user.permissions,
         createdAt: user.createdAt,
-        updatedAt: user.updatedAt,
-        isAdmin: user.IsAdmin
+        updatedAt: user.updatedAt
       };
       
       return {
@@ -172,7 +173,7 @@ export const authAPI = {
         email: email.toLowerCase(),
         name: name,
         password: hashPassword(password),
-        role: "user",
+        role: "USER",
         IsAdmin: false,
         permissions: ["read"],
         createdAt: new Date().toISOString(),
@@ -187,14 +188,14 @@ export const authAPI = {
       
       // Convert to User interface for response
       const userResponse: User = {
-        id: newUser.UserID,
+        UserID: newUser.UserID,
         email: newUser.email,
         name: newUser.name,
-        role: newUser.role === "admin" ? "ADMIN" : newUser.role === "user" ? "USER" : "USER",
+        role: newUser.role,
+        IsAdmin: newUser.IsAdmin,
         permissions: newUser.permissions,
         createdAt: newUser.createdAt,
-        updatedAt: newUser.updatedAt,
-        isAdmin: newUser.IsAdmin
+        updatedAt: newUser.updatedAt
       };
       
       return {
@@ -245,11 +246,11 @@ export const authAPI = {
       
       // Convert to User interface for response
       const userResponse: User = {
-        id: user.UserID,
+        UserID: user.UserID,
         email: user.email,
         name: user.name,
-        role: user.role === "admin" ? "ADMIN" : user.role === "user" ? "USER" : "USER",
-        isAdmin: user.IsAdmin,
+        role: user.role,
+        IsAdmin: user.IsAdmin,
         permissions: user.permissions,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt

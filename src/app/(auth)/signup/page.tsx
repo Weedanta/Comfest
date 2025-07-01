@@ -1,7 +1,6 @@
 import React from "react";
 import { Metadata } from "next";
 import SignupContainer from "@/feature/auth/signup/container/SignupContainer";
-import { AuthProvider } from "@/shared/context/AuthContext";
 
 export const metadata: Metadata = {
   title: "Sign Up - SEA Catering",
@@ -9,9 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function SignupPage() {
-  return (
-    <AuthProvider>
-      <SignupContainer />
-    </AuthProvider>
-  );
+  return <SignupContainer />;
 }

@@ -46,7 +46,7 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
 
   const getSubscriptionStatus = () => {
     // Mock subscription logic - replace with actual subscription data
-    const hasActiveSubscription = user?.role === "premium" || isAdmin;
+    const hasActiveSubscription = user?.role === "PREMIUM" || isAdmin;
     return hasActiveSubscription ? "Premium" : "Basic";
   };
 
@@ -57,6 +57,19 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
       .join("")
       .toUpperCase()
       .slice(0, 2);
+  };
+
+  const getRoleDisplayName = (role: string) => {
+    switch (role) {
+      case "ADMIN":
+        return "Admin";
+      case "USER":
+        return "User";
+      case "PREMIUM":
+        return "Premium";
+      default:
+        return "User";
+    }
   };
 
   if (!user) return null;
@@ -77,7 +90,7 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
         <div className="hidden lg:block text-left">
           <p className="text-white font-medium text-sm">{user.name}</p>
           <p className="text-white/70 text-xs">
-            {getSubscriptionStatus()} • {user.role}
+            {getSubscriptionStatus()} • {getRoleDisplayName(user.role)}
           </p>
         </div>
 
@@ -110,7 +123,7 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
               <span className="text-xs bg-white/20 px-2 py-1 rounded-full">
                 {getSubscriptionStatus()}
               </span>
-              <span className="text-xs capitalize">{user.role}</span>
+              <span className="text-xs capitalize">{getRoleDisplayName(user.role)}</span>
             </div>
           </div>
 

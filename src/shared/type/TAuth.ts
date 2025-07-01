@@ -1,3 +1,5 @@
+export type UserRole = "ADMIN" | "USER" | "PREMIUM";
+
 export interface LoginCredentials {
   email: string;
   password: string;
@@ -7,35 +9,25 @@ export interface RegisterCredentials {
   email: string;
   password: string;
   confirm_password: string;
-  name: string;
 }
 
 export interface User {
-  id: string;
+  UserID?: string;
   email: string;
   name: string;
-  role: "ADMIN" | "USER" | "PREMIUM";
+  role: UserRole;
   permissions?: string[];
   createdAt?: string;
   updatedAt?: string;
-  isAdmin?: boolean;
-}
-
-export interface JWTPayload {
-  userId: string;
-  role?: string;
-  email?: string;
-  isAdmin?: boolean;
-  name?: string;
-  permissions?: string[];
-  exp: number;
-  iat?: number;
+  exp?: number;
+  IsAdmin?: boolean;
 }
 
 export interface ApiStatus {
   code: number;
   isSuccess: boolean;
 }
+
 export interface AuthResponse {
   status: ApiStatus;
   message: string;
@@ -49,6 +41,7 @@ export interface AuthResponse {
   } | null;
   tempData?: TempRegisterData;
 }
+
 export interface TempRegisterData {
   token: string;
   user_id: string;
@@ -58,7 +51,7 @@ export interface TempRegisterData {
 
 export interface JWTPayload {
   UserID: string;
-  role?: string;
+  role?: UserRole;
   email?: string;
   IsAdmin?: boolean;
   name?: string;
@@ -72,14 +65,18 @@ export interface ApiErrorResponse {
   message: string;
   errors?: string[];
 }
+
 export interface OTPVerificationData {
   userID?: string;
   user_id?: string;
   otp_code: string;
 }
+
 export interface DecodedToken {
   UserID: string;
   email?: string;
+  role?: UserRole;
+  IsAdmin?: boolean;
   exp: number;
   iat: number;
 }

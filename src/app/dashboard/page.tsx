@@ -2,28 +2,11 @@
 import React from "react";
 import { useAuth } from "@/shared/hooks/useAuth";
 import { Button } from "@/shared/components/ui/Button";
+import ProtectedRoute from "@/shared/components/ProtectedRoute";
 import Link from "next/link";
 
-export default function DashboardPage() {
+function DashboardContent() {
   const { user, logout, IsAdmin } = useAuth();
-
-  if (!user) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-neutral-100">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-neutral-900 mb-4">
-            Access Denied
-          </h1>
-          <p className="text-neutral-600 mb-6">
-            Please login to access your dashboard.
-          </p>
-          <Link href="/login">
-            <Button variant="primary">Go to Login</Button>
-          </Link>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-neutral-100">
@@ -31,7 +14,7 @@ export default function DashboardPage() {
         <div className="bg-white rounded-lg shadow-lg p-8">
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-neutral-900 mb-2">
-              Welcome, {user.name}! 👋
+              Welcome, {user?.name}! 👋
             </h1>
             <p className="text-neutral-600">
               You have successfully logged into your SEA Catering account.
@@ -43,8 +26,8 @@ export default function DashboardPage() {
             <div className="bg-primary-50 rounded-lg p-6">
               <h3 className="font-semibold text-primary-700 mb-3">Account Info</h3>
               <div className="space-y-2 text-sm">
-                <p><span className="font-medium">Email:</span> {user.email}</p>
-                <p><span className="font-medium">Role:</span> {user.role}</p>
+                <p><span className="font-medium">Email:</span> {user?.email}</p>
+                <p><span className="font-medium">Role:</span> {user?.role}</p>
                 <p><span className="font-medium">Status:</span> 
                   <span className="ml-1 px-2 py-1 bg-success-200 text-success-700 rounded-full text-xs">
                     Active
@@ -107,5 +90,13 @@ export default function DashboardPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function DashboardPage() {
+  return (
+    <ProtectedRoute>
+      <DashboardContent />
+    </ProtectedRoute>
   );
 }

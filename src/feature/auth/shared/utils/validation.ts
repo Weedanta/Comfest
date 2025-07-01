@@ -21,6 +21,13 @@ export const validatePassword = (password: string): ValidationResult => {
     return { isValid: false, error: "Password is required" };
   }
   
+  // For demo accounts, allow simpler validation
+  const isDemoPassword = ["Admin123!", "User123!"].includes(password);
+  
+  if (isDemoPassword) {
+    return { isValid: true };
+  }
+  
   if (password.length < 8) {
     return { isValid: false, error: "Password must be at least 8 characters long" };
   }
