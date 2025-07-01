@@ -5,7 +5,7 @@ import DesktopNav from "../components/DesktopNav";
 import MobileNavHeader from "../components/MobileNavHeader";
 import MobileNav from "../components/MobileNav";
 import { useNavbar } from "../hooks/useNavbar";
-import { navItems } from "../data/navItems";
+import { navItems } from "../data/navItem";
 
 const NavbarContent: React.FC = () => {
   const { isVisible, isOpen, closeMobileMenu, toggleMobileMenu } = useNavbar();

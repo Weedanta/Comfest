@@ -13,7 +13,7 @@ interface MobileNavProps {
 }
 
 const MobileNav: React.FC<MobileNavProps> = ({ items, closeMobileMenu }) => {
-  const { isAuthenticated, user, logout, IsAdmin } = useAuth();
+  const { isAuthenticated, user, logout, IsAdmin } = useAuth() ?? {};
 
   return (
     <div className="h-screen w-screen inset-0 fixed bg-neutral-800 top-0 left-0 z-50 flex flex-col items-center pt-24">

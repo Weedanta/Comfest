@@ -31,7 +31,7 @@ const NavItem: FC<NavItemProps> = ({ item, onClick, className = "" }) => {
         });
       }
     } else {
-      window.location.href = `/home${item.href}`;
+      window.location.href = `{item.href}`;
     }
   };
 
