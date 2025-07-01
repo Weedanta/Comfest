@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const ContactInfo = () => {
   return (
-    <section className="py-16 bg-neutral-100 h-screen">
+    <section className="bg-neutral-100 h-screen">
       <div className="mycontainer h-full flex items-center">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Information */}

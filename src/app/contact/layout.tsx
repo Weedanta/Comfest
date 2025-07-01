@@ -8,7 +8,7 @@ export default function ContactLayout({
 }>) {
   return (
     <>
-      <NavbarContainer />
+      
       {children}
       <FooterContainer />
     </>

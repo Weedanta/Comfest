@@ -1,3 +1,6 @@
+import FooterContainer from "@/shared/layout/footer/container/FooterContainer";
+import NavbarContainer from "@/shared/layout/navbar/container/NavbarContainer";
+
 export default function HomeLayout({
   children,
 }: Readonly<{
@@ -5,7 +8,9 @@ export default function HomeLayout({
 }>) {
   return (
     <>
+      <NavbarContainer />
       {children}
+      <FooterContainer />
     </>
   );
 }
