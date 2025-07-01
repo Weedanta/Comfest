@@ -93,10 +93,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
       initial="hidden"
       animate="visible"
     >
-      <div className="space-y-4 sm:space-y-6 w-full max-w-lg lg:max-w-none text-center lg:text-left font-sans">
+      <div className="space-y-4 sm:space-y-4 w-full max-w-lg lg:max-w-none text-center lg:text-left font-sans">
         {/* Main Heading */}
         <motion.h1 
-          className='text-2xl xs:text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight tracking-tight'
+          className='text-4xl xs:text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight '
           variants={itemVariants}
         >
           <span className="text-white block">Healthy Meals,</span>

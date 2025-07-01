@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/shared/hooks/useAuth";
-import { authAPI } from "../../shared/api/authAPI";
+import { apiClient } from "@/lib/api";
 import { 
   validateEmail, 
   validatePassword, 
@@ -34,13 +34,11 @@ export const useLogin = () => {
   const validateForm = (): boolean => {
     const newErrors: LoginFormErrors = {};
 
-    // Validate email
     const emailValidation = validateEmail(formData.email);
     if (!emailValidation.isValid) {
       newErrors.email = emailValidation.error;
     }
 
-    // Validate password
     const passwordValidation = validatePassword(formData.password);
     if (!passwordValidation.isValid) {
       newErrors.password = passwordValidation.error;
@@ -57,7 +55,6 @@ export const useLogin = () => {
       [field]: sanitizedValue
     }));
 
-    // Clear specific field error when user starts typing
     if (errors[field]) {
       setErrors(prev => ({
         ...prev,
@@ -65,7 +62,6 @@ export const useLogin = () => {
       }));
     }
 
-    // Clear general error
     if (errors.general) {
       setErrors(prev => ({
         ...prev,
@@ -77,10 +73,8 @@ export const useLogin = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Clear previous errors
     setErrors({});
 
-    // Validate form
     if (!validateForm()) {
       return;
     }
@@ -93,23 +87,21 @@ export const useLogin = () => {
         password: formData.password,
       };
 
-      const response = await authAPI.login(credentials);
+      // Use apiClient instead of authAPI
+      const response = await apiClient.login(credentials);
 
-      if (response.status.isSuccess && response.data?.token) {
-        // Use AuthContext login function
+      if (response.data?.token) {
         authLogin(response.data.token);
-        
-        // Redirect to dashboard or home
         router.push("/dashboard");
       } else {
         setErrors({
           general: response.message || "Login failed. Please try again."
         });
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Login error:", error);
       setErrors({
-        general: "An unexpected error occurred. Please try again."
+        general: error.message || "An unexpected error occurred. Please try again."
       });
     } finally {
       setIsLoading(false);

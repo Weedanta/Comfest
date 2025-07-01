@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api'
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '/api'
 
 class ApiClient {
   private baseURL: string
@@ -28,17 +28,14 @@ class ApiClient {
   private async request(endpoint: string, options: RequestInit = {}) {
     const url = `${this.baseURL}${endpoint}`
     
-    // Fix: Use Record<string, string> untuk headers
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
     }
 
-    // Add existing headers from options
     if (options.headers) {
       Object.assign(headers, options.headers)
     }
 
-    // Fix: Use bracket notation untuk Authorization
     if (this.token) {
       headers['Authorization'] = `Bearer ${this.token}`
     }
@@ -48,18 +45,21 @@ class ApiClient {
       headers,
     })
 
-    // Fix: Better error handling
-    if (!response.ok) {
-      let errorData
-      try {
-        errorData = await response.json()
-      } catch {
-        errorData = { message: `HTTP error! status: ${response.status}` }
+    let data
+    try {
+      data = await response.json()
+    } catch {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
       }
-      throw new Error(errorData.message || `HTTP error! status: ${response.status}`)
+      data = {}
     }
 
-    return response.json()
+    if (!response.ok) {
+      throw new Error(data.message || `HTTP error! status: ${response.status}`)
+    }
+
+    return data
   }
 
   // Auth methods
@@ -108,25 +108,14 @@ class ApiClient {
 
   // Order methods
   async createOrder(orderData: any) {
-    return this.request('/orders', {
+    return this.request('/order', {
       method: 'POST',
       body: JSON.stringify(orderData),
     })
   }
 
   async getMyOrders() {
-    return this.request('/orders')
-  }
-
-  async getAllOrders() {
-    return this.request('/orders/admin')
-  }
-
-  async updateOrderStatus(orderId: string, status: string) {
-    return this.request(`/orders/${orderId}/status`, {
-      method: 'PATCH',
-      body: JSON.stringify({ status }),
-    })
+    return this.request('/order')
   }
 }
 

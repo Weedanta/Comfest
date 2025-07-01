@@ -1,4 +1,6 @@
 export interface MealPlan {
+  primaryColor: any;
+  color: any;
   id: string;
   name: string;
   price: number;

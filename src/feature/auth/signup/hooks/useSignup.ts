@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/shared/hooks/useAuth";
-import { authAPI } from "../../shared/api/authAPI";
+import { apiClient } from "@/lib/api";
 import { 
   validateEmail, 
   validatePassword, 
@@ -42,25 +42,21 @@ export const useSignup = () => {
   const validateForm = (): boolean => {
     const newErrors: SignupFormErrors = {};
 
-    // Validate name
     const nameValidation = validateName(formData.name);
     if (!nameValidation.isValid) {
       newErrors.name = nameValidation.error;
     }
 
-    // Validate email
     const emailValidation = validateEmail(formData.email);
     if (!emailValidation.isValid) {
       newErrors.email = emailValidation.error;
     }
 
-    // Validate password
     const passwordValidation = validatePassword(formData.password);
     if (!passwordValidation.isValid) {
       newErrors.password = passwordValidation.error;
     }
 
-    // Validate confirm password
     const confirmPasswordValidation = validateConfirmPassword(
       formData.password, 
       formData.confirm_password
@@ -80,7 +76,6 @@ export const useSignup = () => {
       [field]: sanitizedValue
     }));
 
-    // Clear specific field error when user starts typing
     if (errors[field]) {
       setErrors(prev => ({
         ...prev,
@@ -88,7 +83,6 @@ export const useSignup = () => {
       }));
     }
 
-    // Clear general error
     if (errors.general) {
       setErrors(prev => ({
         ...prev,
@@ -100,10 +94,8 @@ export const useSignup = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Clear previous errors
     setErrors({});
 
-    // Validate form
     if (!validateForm()) {
       return;
     }
@@ -118,23 +110,21 @@ export const useSignup = () => {
         name: formData.name.trim(),
       };
 
-      const response = await authAPI.register(credentials);
+      // Use apiClient instead of authAPI
+      const response = await apiClient.register(credentials);
 
-      if (response.status.isSuccess && response.data?.token) {
-        // Use AuthContext login function to auto-login after signup
+      if (response.data?.token) {
         authLogin(response.data.token);
-        
-        // Redirect to dashboard or home
         router.push("/dashboard");
       } else {
         setErrors({
           general: response.message || "Registration failed. Please try again."
         });
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Signup error:", error);
       setErrors({
-        general: "An unexpected error occurred. Please try again."
+        general: error.message || "An unexpected error occurred. Please try again."
       });
     } finally {
       setIsLoading(false);

@@ -1,10 +1,10 @@
 import { prisma } from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+import { signJWT } from '@/lib/jwt';
 import { User, LoginCredentials, RegisterCredentials } from '@/shared/type/TAuth';
 
 export class AuthService {
-  static async register(credentials: RegisterCredentials) {
+  static async register(credentials: RegisterCredentials & { name: string }) {
     const { email, password, name } = credentials;
     
     // Check if user exists
@@ -53,17 +53,13 @@ export class AuthService {
   }
   
   private static generateTokenResponse(user: any) {
-    const token = jwt.sign(
-      {
-        userId: user.id,
-        email: user.email,
-        name: user.name,
-        role: user.role,
-        isAdmin: user.isAdmin
-      },
-      process.env.JWT_SECRET!,
-      { expiresIn: '7d' }
-    );
+    const token = signJWT({
+      userId: user.id,
+      email: user.email,
+      name: user.name,
+      role: user.role,
+      isAdmin: user.isAdmin
+    });
     
     return {
       token,
@@ -75,20 +71,5 @@ export class AuthService {
         isAdmin: user.isAdmin
       }
     };
-  }
-  
-  static async getUserById(userId: string) {
-    return await prisma.user.findUnique({
-      where: { id: userId },
-      select: {
-        id: true,
-        email: true,
-        name: true,
-        role: true,
-        isAdmin: true,
-        createdAt: true,
-        updatedAt: true
-      }
-    });
   }
 }
