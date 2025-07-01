@@ -24,8 +24,6 @@ interface AuthProviderProps {
 // Mock function to decode JWT token - replace with actual JWT library
 const decodeToken = (token: string): JWTPayload | null => {
   try {
-    // This is a mock implementation
-    // In real app, use jwt-decode library or similar
     const payload = JSON.parse(atob(token.split('.')[1]));
     return payload as JWTPayload;
   } catch (error) {
@@ -79,31 +77,30 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }, []);
 
   const login = (token: string) => {
-    try {
-      const decoded = decodeToken(token);
-      if (!decoded) {
-        throw new Error("Invalid token");
-      }
-
-      const userData: User = {
-        UserID: decoded.UserID,
-        email: decoded.email || "",
-        name: decoded.name || "",
-        role: decoded.role || "user",
-        IsAdmin: decoded.IsAdmin || false,
-        permissions: decoded.permissions || [],
-      };
-
-      // Store in localStorage
-      localStorage.setItem("authToken", token);
-      localStorage.setItem("user", JSON.stringify(userData));
-
-      setUser(userData);
-    } catch (error) {
-      console.error("Login error:", error);
+  try {
+    const decoded = decodeToken(token);
+    if (!decoded) {
       throw new Error("Invalid token");
     }
-  };
+
+    const userData: User = {
+      id: decoded.userId,
+      email: decoded.email || "",
+      name: decoded.name || "",
+      role: (decoded.role === "ADMIN" || decoded.role === "USER" || decoded.role === "PREMIUM") ? decoded.role : "USER",
+      isAdmin: decoded.isAdmin || false,
+      permissions: decoded.permissions || [],
+    };
+
+    localStorage.setItem("authToken", token);
+    localStorage.setItem("user", JSON.stringify(userData));
+
+    setUser(userData);
+  } catch (error) {
+    console.error("Login error:", error);
+    throw new Error("Invalid token");
+  }
+};
 
   const logout = () => {
     // Clear localStorage
@@ -126,7 +123,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     user,
     isAuthenticated: !!user,
     isLoading,
-    IsAdmin: user?.IsAdmin || user?.role === "admin" || false,
+    IsAdmin: user?.isAdmin || user?.role === "ADMIN" || false,
     login,
     logout,
     updateUser,
