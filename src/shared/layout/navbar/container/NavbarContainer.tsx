@@ -1,13 +1,12 @@
 "use client";
 import React from "react";
-import { AuthProvider } from "@/shared/context/AuthContext";
 import DesktopNav from "../components/DesktopNav";
 import MobileNavHeader from "../components/MobileNavHeader";
 import MobileNav from "../components/MobileNav";
 import { useNavbar } from "../hooks/useNavbar";
 import { navItems } from "../data/navItem";
 
-const NavbarContent: React.FC = () => {
+const NavbarContainer: React.FC = () => {
   const { isVisible, isOpen, closeMobileMenu, toggleMobileMenu } = useNavbar();
 
   return (
@@ -20,14 +19,6 @@ const NavbarContent: React.FC = () => {
       />
       {isOpen && <MobileNav items={navItems} closeMobileMenu={closeMobileMenu} />}
     </>
-  );
-};
-
-const NavbarContainer: React.FC = () => {
-  return (
-    <AuthProvider>
-      <NavbarContent />
-    </AuthProvider>
   );
 };
 
