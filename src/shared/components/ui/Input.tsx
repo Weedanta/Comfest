@@ -4,35 +4,28 @@ import { VariantProps, cva } from "class-variance-authority";
 import { cn } from "@/shared/utils/cn";
 
 const inputVariants = cva(
-  "w-full px-3 py-2 text-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+  "w-full px-4 py-3 rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent",
   {
     variants: {
       variant: {
-        default: "border border-neutral-300 bg-white hover:border-neutral-400 focus:border-primary-500 focus:ring-2 focus:ring-primary-200",
-        filled: "border-0 bg-neutral-100 hover:bg-neutral-150 focus:bg-white focus:ring-2 focus:ring-primary-200",
-        ghost: "border-0 bg-transparent hover:bg-neutral-100 focus:bg-neutral-50",
+        default: "border-neutral-300 bg-white text-neutral-900 placeholder:text-neutral-500",
+        error: "border-danger-500 bg-white text-neutral-900 placeholder:text-neutral-500 focus:ring-danger-500",
+        success: "border-success-500 bg-white text-neutral-900 placeholder:text-neutral-500 focus:ring-success-500",
       },
       size: {
-        default: "h-10",
-        sm: "h-9",
-        lg: "h-12",
+        sm: "h-10 text-sm",
+        md: "h-12 text-base",
+        lg: "h-14 text-lg",
       },
-      rounded: {
-        default: "rounded-md",
-        sm: "rounded-sm", 
-        lg: "rounded-lg",
-        full: "rounded-full",
-      }
     },
     defaultVariants: {
       variant: "default",
-      size: "default",
-      rounded: "default",
+      size: "md",
     },
   }
 );
 
-export interface InputProps
+interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "size">,
     VariantProps<typeof inputVariants> {
   label?: string;
@@ -47,23 +40,24 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     className, 
     variant, 
     size, 
-    rounded,
     label, 
     error, 
     helperText, 
     leftIcon, 
     rightIcon, 
-    id,
+    id, 
     ...props 
   }, ref) => {
     const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
+    const hasError = !!error;
+    const finalVariant = hasError ? "error" : variant;
 
     return (
-      <div className="space-y-2">
+      <div className="w-full">
         {label && (
           <label 
-            htmlFor={inputId}
-            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            htmlFor={inputId} 
+            className="block text-sm font-medium text-neutral-700 mb-2"
           >
             {label}
           </label>
@@ -71,37 +65,36 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         
         <div className="relative">
           {leftIcon && (
-            <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-500">
+            <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400">
               {leftIcon}
             </div>
           )}
           
           <input
+            ref={ref}
             id={inputId}
             className={cn(
-              inputVariants({ variant, size, rounded }),
+              inputVariants({ variant: finalVariant, size }),
               leftIcon && "pl-10",
               rightIcon && "pr-10",
-              error && "border-danger-500 focus:border-danger-500 focus:ring-danger-200",
               className
             )}
-            ref={ref}
             {...props}
           />
           
           {rightIcon && (
-            <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-neutral-500">
+            <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-neutral-400">
               {rightIcon}
             </div>
           )}
         </div>
         
         {error && (
-          <p className="text-sm text-danger-600">{error}</p>
+          <p className="mt-1 text-sm text-danger-500">{error}</p>
         )}
         
         {helperText && !error && (
-          <p className="text-sm text-neutral-500">{helperText}</p>
+          <p className="mt-1 text-sm text-neutral-500">{helperText}</p>
         )}
       </div>
     );
@@ -109,5 +102,4 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 );
 
 Input.displayName = "Input";
-
 export { Input, inputVariants };
