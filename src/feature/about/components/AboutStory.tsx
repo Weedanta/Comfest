@@ -21,7 +21,7 @@ const AboutStory = () => {
               Today, we're working hard to meet the rising demand while maintaining the quality and personal touch that made us who we are.
             </p>
           </div>
-          <div className="bg-white p-8 rounded-lg shadow-lg">
+          <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300">
             <h3 className="text-2xl font-bold text-neutral-800 mb-4">Why Choose SEA Catering?</h3>
             <ul className="space-y-4">
               <li className="flex items-start">

@@ -200,7 +200,7 @@ const MealPlansSection: React.FC<MealPlansSectionProps> = ({ data, loading, erro
                     <Button 
                       variant={plan.isPopular ? "primary" : "secondary"} 
                       size="normal" 
-                      className="w-full group-hover:scale-105 transition-transform"
+                      className="w-full group-hover:scale-105  transition-transform"
                     >
                       Choose {plan.name}
                     </Button>
@@ -213,12 +213,12 @@ const MealPlansSection: React.FC<MealPlansSectionProps> = ({ data, loading, erro
 
         {/* Bottom CTA */}
         <motion.div 
-          className="text-center mt-16"
+          className="text-center mt-16 flex w-full justify-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-        >
+        > 
           <Link href="/menu">
             <Button variant="tertiary" size="large">
               View All Plans
