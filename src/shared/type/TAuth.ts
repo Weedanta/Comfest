@@ -1,24 +1,37 @@
-
 export interface LoginCredentials {
   email: string;
   password: string;
 }
+
 export interface RegisterCredentials {
   email: string;
   password: string;
   confirm_password: string;
+  name: string;
 }
+
 export interface User {
-  UserID?: string;
+  id: string;
   email: string;
   name: string;
-  role: "admin" | "user" | string;
+  role: "ADMIN" | "USER" | "PREMIUM";
   permissions?: string[];
   createdAt?: string;
   updatedAt?: string;
-  exp?: number;
-  IsAdmin?: boolean;
+  isAdmin?: boolean;
 }
+
+export interface JWTPayload {
+  userId: string;
+  role?: string;
+  email?: string;
+  isAdmin?: boolean;
+  name?: string;
+  permissions?: string[];
+  exp: number;
+  iat?: number;
+}
+
 export interface ApiStatus {
   code: number;
   isSuccess: boolean;
